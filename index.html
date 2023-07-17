@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Title</title>
+	
+	<style>  
+	   body {
+		   padding: 10px 10px;
+	   }
+	   .formdesign  {
+		   font-size: 13px;
+	   }
+	   .formdesign input {
+		   width : 50%;
+		   padding : 5px 5px;
+		   border: 2px solid black;
+		   margin: 12px;
+		   border-radius : 4px;
+		   font-size: 13px;
+	   }
+       .formerror  {
+           color: red;
+       }
+	   </style>
+	</head>
+	<body>
+		<h4> Form Validation  </h4>
+		<form action = "/myaction.php" name = "myForm" onsubmit= " return validateForm()"
+        method ="post"> 
+			<div class = "formdesign" id = "name">
+			Full Name : <input type= "text" name = "fname"><span class = "formerror">
+				 </span>
+            </div>
+            <div class = "formdesign" id = "email">
+			Email ID: <input type= "email" name = "femail" required><span class = "formerror">
+				 </span>
+            </div>
+            <div class = "formdesign" id = "phone">
+			Phone Number : <input type= "phone" name = "fphone" required><span class = "formerror">
+				 </span>
+            </div>
+            <div class = "formdesign" id = "pass">
+			Password : <input type= "password" name = "fpass" required><span class = "formerror">
+				 </span>
+            </div>
+            <div class = "formdesign" id = "cpass">
+			Confirm Password : <input type= "password" name = "fcpass" required><span class = "formerror">
+				 </span>
+            </div>
+            <input class = "but" type = "submit" value = " Submit">
+			</form>
+	</body>
+    <script>
+        function clearErrors() {
+            errors = document.getElementsByClassName('formerror');
+            for(let item of errors)   
+            {
+                item.innerHTML = "";
+            }
+
+        }
+        function seterror(id, error)   {
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+        }
+        function validateForm()  {
+           var returnval = true;
+           var name = document.forms['myForm']["fname"].value;
+           if (name.length <5)  {
+               seterror("name", "*Length of name cannot be less than 5");
+               returnval = false;
+           }
+            var email = document.forms['myForm']["femail"].value;
+           if (email.length > 15)  {
+               seterror("email", "*Length of email cannot be so long");
+               returnval = false;
+           }
+
+            var phone = document.forms['myForm']["fphone"].value;
+            if (phone.length != 10)  {
+               seterror("phone", "*invalid phone number");
+               returnval = false;
+           }
+             var phone = document.forms['myForm']["fphone"].value;
+            if (phone == 123456789)  {
+               seterror("phone", "*Cannot have this phone number");
+               returnval = false;
+           }
+            var password = document.forms['myForm']["fpass"].value;
+            if (password.length < 8)  {
+               seterror("pass", "*password cannot be less than 8");
+               returnval = false;
+           }
+           var cpassword = document.forms['myForm']["fcpass"].value;
+           if (cpassword != password)  {
+               seterror("cpass", "*Password and Confirm password should match");
+               returnval = false;
+           }
+           var password = document.forms['myForm']["fpass"].value;
+            if (password== name )  {
+               seterror("pass", "*password cannot be equal to name of the user");
+               returnval = false;
+           }
+            var password = document.forms['myForm']["fpass"].value;
+            if (password== "Password" )  {
+               seterror("pass", "*password cannot be equal to password");
+               returnval = false;
+           }
+
+
+
+
+           return returnval;
+         }
+         </script>
+</html>
